@@ -5,15 +5,53 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@drawable/login_img"
+    >
+
+
+    <TextView
+        android:id="@+id/welcome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inter_tight"
+        android:text="@string/welcome"
+        android:textColor="#FFFFFF"
+        android:layout_marginStart="20dp"
+        android:textSize="56sp"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toTopOf="@id/signin"
+        app:layout_constraintLeft_toLeftOf="parent" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:id="@+id/signin"
+        app:layout_constraintBottom_toTopOf="@id/google"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:text="@string/please_signing_to_continue"
+        android:layout_marginBottom="24dp"
+        android:textSize="16sp"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="528dp"
+        android:layout_marginStart="20dp"
+        />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/google"
+        android:text="@string/continue_with_google"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        android:layout_marginStart="20dp"
+        app:icon="@drawable/google1"
+        android:layout_marginBottom="16dp"
+        app:iconPadding="8dp"
+        android:background="@drawable/rounded"
+        app:backgroundTint="#E54900"
+        app:iconGravity="textStart"
+        android:layout_marginEnd="20dp"
+        android:textSize="16sp"
+        app:iconSize="24dp"
+        tools:ignore="MissingConstraints" />
 </androidx.constraintlayout.widget.ConstraintLayout>
