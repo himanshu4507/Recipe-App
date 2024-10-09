@@ -3,4 +3,6 @@
     <string name="welcome">Welcome to \n<b>Rec</b>ii<b>p</b>ii<b>e</b></string>
     <string name="please_signing_to_continue">Please signing to continue</string>
     <string name="continue_with_google">Continue with google</string>
+    <string name="hey_user"><![CDATA[👋 Hey User]]></string>
+    <string name="discover_tasty_and_healthy_receipt">Discover tasty and healthy receipt</string>
 </resources>
