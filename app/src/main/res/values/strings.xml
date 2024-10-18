@@ -5,4 +5,8 @@
     <string name="continue_with_google">Continue with google</string>
     <string name="hey_user"><![CDATA[👋 Hey User]]></string>
     <string name="discover_tasty_and_healthy_receipt">Discover tasty and healthy receipt</string>
+    <string name="popular_recipes">Popular Recipes</string>
+    <string name="all_recipes">All recipes</string>
+    <string name="recipeimage">recipeImage</string>
+    <string name="dish_image">Dish Image</string>
 </resources>
