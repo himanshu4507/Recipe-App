@@ -1,6 +1,4 @@
-package com.hashdroid.recipeapp.network
-
-import com.hashdroid.recipeapp.network.RecipeResponse
+import com.hashdroid.recipeapp.RecipeResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query

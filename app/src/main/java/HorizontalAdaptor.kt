@@ -1,5 +1,4 @@
-package com.hashdroid.recipeapp
-
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,10 +7,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.recipeapp.R
-import com.hashdroid.recipeapp.network.Recipe
+import com.hashdroid.recipeapp.Recipe
 import kotlin.random.Random
 
-class HorizontalAdapter(private val recipes: List<Recipe>) : RecyclerView.Adapter<MyViewHolder>() {
+class HorizontalAdapter(private val recipes: List<Recipe>) : RecyclerView.Adapter<HorizontalAdapter.MyViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -23,6 +22,7 @@ class HorizontalAdapter(private val recipes: List<Recipe>) : RecyclerView.Adapte
         return recipes.size
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val recipe = recipes[position]
         holder.dish_name.text = recipe.title
@@ -34,10 +34,10 @@ class HorizontalAdapter(private val recipes: List<Recipe>) : RecyclerView.Adapte
             .load(recipe.image)
             .into(holder.dish_image)
     }
+    class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        var dish_name: TextView = itemView.findViewById(R.id.dish_name)
+        var cook_time: TextView = itemView.findViewById(R.id.cook_time)
+        var dish_image: ImageView = itemView.findViewById(R.id.dish_image)
+    }
 }
 
-class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    var dish_name: TextView = itemView.findViewById(R.id.dish_name)
-    var cook_time: TextView = itemView.findViewById(R.id.cook_time)
-    var dish_image: ImageView = itemView.findViewById(R.id.dish_image)
-}

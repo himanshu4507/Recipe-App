@@ -5,9 +5,9 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.hashdroid.recipeapp.HorizontalAdapter
+import HorizontalAdapter
 import com.hashdroid.recipeapp.RetrofitClient
-import com.hashdroid.recipeapp.network.RecipeResponse
+import com.hashdroid.recipeapp.RecipeResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

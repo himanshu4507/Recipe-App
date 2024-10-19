@@ -1,4 +1,4 @@
-package com.hashdroid.recipeapp.network
+package com.hashdroid.recipeapp
 
 data class RecipeResponse(
     val recipes: List<Recipe>
