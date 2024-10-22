@@ -92,12 +92,20 @@
         android:layout_marginEnd="16dp"
         />
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/Allrecipr_recycler"
+        android:id="@+id/recycler_view2"
         android:layout_width="match_parent"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/AllRecipie"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+        android:id="@+id/bottomNavBar"
+        android:layout_height="?attr/actionBarSize"
+        tools:ignore="MissingConstraints"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         />
 

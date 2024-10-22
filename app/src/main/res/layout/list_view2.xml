@@ -1,0 +1,54 @@
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/list2"
+    android:clipToOutline="true"
+    android:layout_margin="8dp">
+
+    <!-- LinearLayout to align ImageView and TextViews horizontally -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"> <!-- Aligns the contents vertically in the center -->
+
+        <!-- Image or recipe thumbnail -->
+        <ImageView
+            android:id="@+id/dish_image2"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:contentDescription="@string/recipeimage"
+            android:scaleType="centerCrop"
+            android:layout_marginEnd="16dp" />
+
+        <!-- Vertical LinearLayout for the two TextViews, centered vertically -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            > <!-- Aligns the text items vertically in the center -->
+
+            <!-- Text for recipe name -->
+            <TextView
+                android:id="@+id/dish_name2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter"
+                android:textFontWeight="500"
+                android:textSize="14sp"
+                android:textColor="#000" />
+
+            <!-- Text for the preparation time -->
+            <TextView
+                android:id="@+id/cook_time2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter"
+                android:textSize="12sp"
+                android:textColor="#666"
+                android:layout_marginTop="4dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+</FrameLayout>

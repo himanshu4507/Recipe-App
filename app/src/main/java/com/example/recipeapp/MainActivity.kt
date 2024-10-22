@@ -1,6 +1,8 @@
 package com.example.recipeapp
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -15,6 +17,16 @@ class MainActivity : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+
+
+        }
+        val google: Button = findViewById(R.id.google)
+
+        google.setOnClickListener {
+            // Create an Intent to start MainActivity2
+            val intent = Intent(this, MainActivity2::class.java)
+            startActivity(intent)  // Start the second activity
         }
     }
+
 }
