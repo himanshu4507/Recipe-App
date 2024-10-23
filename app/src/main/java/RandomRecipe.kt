@@ -8,7 +8,7 @@ interface RecipeApiService {
     @GET("recipes/complexSearch")
     fun getSearchRecipes(
         @Query("number") number: Int,
-        @Query("apikey") apiKey:String
+        @Query("apiKey") apiKey:String
     ): Call<RecipeResponse2>
 
     @GET("recipes/random")
