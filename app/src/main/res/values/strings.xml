@@ -9,4 +9,6 @@
     <string name="all_recipes">All recipes</string>
     <string name="recipeimage">recipeImage</string>
     <string name="dish_image">Dish Image</string>
+    <string name="home">Home</string>
+    <string name="favourite">Favourite</string>
 </resources>

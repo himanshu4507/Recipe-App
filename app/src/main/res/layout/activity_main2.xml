@@ -104,9 +104,12 @@
         android:layout_width="match_parent"
         android:id="@+id/bottomNavBar"
         android:layout_height="?attr/actionBarSize"
-        tools:ignore="MissingConstraints"
+        android:background="#FFFFFF"
+        app:itemIconTint="@color/color_selector"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/nav_bar"
+        app:itemTextColor="@color/color_selector"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
