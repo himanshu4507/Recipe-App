@@ -10,7 +10,7 @@ import com.example.recipeapp.R
 import com.hashdroid.recipeapp.Recipe
 import kotlin.random.Random
 
-class VerticalAdaptor(private val recipes: List<Recipe>) : RecyclerView.Adapter<VerticalAdaptor.MyViewHolder>() {
+class VerticalAdaptor(private val recipes: List<Recipe>,private val onItemClick: (Int) -> Unit ) : RecyclerView.Adapter<VerticalAdaptor.MyViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -34,11 +34,19 @@ class VerticalAdaptor(private val recipes: List<Recipe>) : RecyclerView.Adapter<
         Glide.with(holder.itemView.context)
             .load(recipe.image)
             .into(holder.dish_image2)
+
+        // Handle click event
+        holder.root.setOnClickListener {
+            onItemClick(recipe.id) // Pass the ID to the listener
+        }
     }
+
+
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var dish_name2: TextView = itemView.findViewById(R.id.dish_name2)
         var cook_time2: TextView = itemView.findViewById(R.id.cook_time2)
         var dish_image2: ImageView = itemView.findViewById(R.id.dish_image2)
+        var root=itemView;
     }
 }
 

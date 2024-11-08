@@ -10,5 +10,6 @@ data class RecipeResponse2(
 
 data class Recipe(
     val title: String,
-    val image: String
+    val image: String,
+    val id:Int
 )
