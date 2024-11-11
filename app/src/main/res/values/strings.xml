@@ -19,4 +19,7 @@
     <string name="ingredients_img">ingredients_img</string>
     <string name="instructions">Instructions</string>
     <string name="llll">Lorem ipsum dolor sit amet consectetur. Sagittis facilisis aliquet aenean lorem ullamcorper et. Risus lectus id sed fermentum in. At porta sed ut lorem volutpat elementum mi sollicitudin. Laoreet tempor nullam velit dui amet mauris sed ac sem.</string>
+    <string name="equipments">Equipments</string>
+    <string name="equipments_img">equipments_img</string>
+    <string name="quick_summary">Quick Summary</string>
 </resources>

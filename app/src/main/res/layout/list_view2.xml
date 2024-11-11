@@ -1,33 +1,36 @@
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/list2"
-    android:clipToOutline="true"
-    android:layout_marginEnd="8dp">
+    android:layout_marginEnd="16dp"
+    android:layout_marginBottom="8dp"
+    android:background="#FFFFFF"
+    app:cardCornerRadius="12dp"
+    app:strokeColor="#CCCCCC"
+    app:strokeWidth="1dp">
 
     <!-- LinearLayout to align ImageView and TextViews horizontally -->
     <LinearLayout
         android:layout_width="match_parent"
+        android:background="#FFFFFF"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"> <!-- Aligns the contents vertically in the center -->
+        android:gravity="center_vertical"
+        android:orientation="horizontal"> <!-- Aligns the contents vertically in the center -->
 
         <!-- Image or recipe thumbnail -->
         <ImageView
             android:id="@+id/dish_image2"
             android:layout_width="100dp"
             android:layout_height="100dp"
+            android:layout_marginEnd="16dp"
             android:contentDescription="@string/recipeimage"
-            android:scaleType="centerCrop"
-            android:layout_marginEnd="16dp" />
+            android:scaleType="centerCrop" />
 
         <!-- Vertical LinearLayout for the two TextViews, centered vertically -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            > <!-- Aligns the text items vertically in the center -->
+            android:orientation="vertical"> <!-- Aligns the text items vertically in the center -->
 
             <!-- Text for recipe name -->
             <TextView
@@ -35,20 +38,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/inter"
+                android:textColor="#000"
                 android:textFontWeight="500"
-                android:textSize="14sp"
-                android:textColor="#000" />
+                android:textSize="14sp" />
 
             <!-- Text for the preparation time -->
             <TextView
                 android:id="@+id/cook_time2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
                 android:fontFamily="@font/inter"
-                android:textSize="12sp"
                 android:textColor="#666"
-                android:layout_marginTop="4dp" />
+                android:textSize="12sp" />
         </LinearLayout>
 
     </LinearLayout>
-</FrameLayout>
+</com.google.android.material.card.MaterialCardView>
