@@ -28,8 +28,9 @@
         <View
             android:id="@+id/overlay"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/gradient_overlay" />
+            android:layout_height="360dp"
+            android:background="@drawable/gradient_overlay"
+            tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/fragement_dish_name"
@@ -63,13 +64,14 @@
             app:layout_constraintEnd_toEndOf="parent">
 
             <!-- Card 1 -->
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:cardCornerRadius="12dp"
                 android:backgroundTint="#FFFFFF"
+                app:cardCornerRadius="12dp"
                 app:strokeWidth="1dp"
+                app:cardElevation="0dp"
                 app:strokeColor="#E7F0F8"
                 android:layout_margin="4dp">
 
@@ -99,16 +101,17 @@
                         android:textColor="#E54900"
                         android:textStyle="bold" />
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
             <!-- Card 2 -->
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:cardCornerRadius="12dp"
                 android:backgroundTint="#FFFFFF"
                 app:strokeWidth="1dp"
+                app:cardElevation="0dp"
                 app:strokeColor="#E7F0F8"
                 android:layout_margin="4dp">
 
@@ -138,10 +141,10 @@
                         android:textColor="#E54900"
                         android:textStyle="bold" />
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
             <!-- Card 3 -->
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -149,6 +152,7 @@
                 android:backgroundTint="#FFFFFF"
                 app:strokeWidth="1dp"
                 app:strokeColor="#E7F0F8"
+                app:cardElevation="0dp"
                 android:layout_margin="4dp">
 
                 <LinearLayout
@@ -177,7 +181,7 @@
                         android:textColor="#E54900"
                         android:textStyle="bold" />
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>
 
