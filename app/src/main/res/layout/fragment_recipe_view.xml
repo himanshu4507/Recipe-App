@@ -77,7 +77,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="12dp"
+                    android:paddingVertical="12dp"
                     android:gravity="center">
 
                     <TextView
@@ -86,7 +86,7 @@
                         android:layout_height="wrap_content"
                         android:text="Ready in"
                         android:fontFamily="@font/inter"
-                        android:textSize="10sp"
+                        android:textSize="12sp"
                         android:textColor="#606F89"
                         />
 
@@ -116,7 +116,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="12dp"
+                    android:paddingVertical="12dp"
                     android:gravity="center">
 
                     <TextView
@@ -125,7 +125,7 @@
                         android:layout_height="wrap_content"
                         android:text="Servings"
                         android:fontFamily="@font/inter"
-                        android:textSize="10sp"
+                        android:textSize="12sp"
                         android:textColor="#606F89"
                         />
 
@@ -155,7 +155,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="12dp"
+                    android:paddingVertical="12dp"
                     android:gravity="center">
 
                     <TextView
@@ -163,7 +163,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Price/Servings"
-                        android:maxLines="1"
                         android:fontFamily="@font/inter"
                         android:textSize="12sp"
                         android:textColor="#606F89"
