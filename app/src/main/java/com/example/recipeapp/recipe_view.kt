@@ -1,5 +1,4 @@
 package com.example.recipeapp
-
 import EquipmentsAdaptor
 import IngredientsAdaptor
 import android.annotation.SuppressLint
@@ -9,9 +8,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.media3.database.DatabaseProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -20,6 +21,10 @@ import com.hashdroid.recipeapp.Ingredient
 import com.hashdroid.recipeapp.Recipie_View
 import com.hashdroid.recipeapp.RetrofitClient
 import com.hashdroid.recipeapp.Step
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -28,6 +33,11 @@ import retrofit2.Response
 class Recipie_view : Fragment() {
 
     private var recipeId: Int? = null
+    private lateinit var database: FavouritesDB
+    private lateinit var favouritesImg: ImageView
+    private var imgTitle: String? = null
+    private var imgUrl: String? = null
+    private var cookingtime: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,6 +65,12 @@ class Recipie_view : Fragment() {
         val equipmentRv=view.findViewById<RecyclerView>(R.id.equipments_rv)
         equipmentRv.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+
+        // Initialize database
+        database = FavouritesDB.getDatabase(requireContext())
+
+        // Reference to the heart image view
+        favouritesImg = view.findViewById(R.id.favourites_img)
 
 
         fetchRecipieView(view);
@@ -146,6 +162,15 @@ class Recipie_view : Fragment() {
                         val Summary=view.findViewById<TextView>(R.id.summary)
                         Summary.text= decoded
 
+                        //for favourite fragment
+
+                        imgTitle = it.title
+                        imgUrl = it.image
+                        cookingtime = it.readyInMinutes
+
+                        // Set up favorite handling
+                        handleFavoriteClick()
+
 
                     }
                 }
@@ -155,6 +180,50 @@ class Recipie_view : Fragment() {
                 Toast.makeText(requireContext(), p1.localizedMessage, Toast.LENGTH_LONG).show()
             }
         })
+    }
+
+    private fun handleFavoriteClick() {
+        if (recipeId == null || imgTitle == null || imgUrl == null) {
+            return
+        }
+
+        val currentRecipe = FavouritesEntity(
+            id= recipeId!!,
+            title = imgTitle!!,
+            image = imgUrl!!,
+            cookingTime = cookingtime
+        )
+
+        // Check initial state and set image accordingly
+        CoroutineScope(Dispatchers.IO).launch {
+            val isFavorite = database.favouritesDAO().isFavorite(recipeId!!)
+            withContext(Dispatchers.Main) {
+                favouritesImg.setImageResource(if (isFavorite) R.drawable.addedfav else R.drawable.addfav)
+            }
+        }
+
+        // Set up click listener
+        favouritesImg.setOnClickListener {
+            CoroutineScope(Dispatchers.IO).launch {
+                val isAlreadyFavorite = database.favouritesDAO().isFavorite(recipeId!!)
+
+                if (isAlreadyFavorite) {
+                    // Remove from favorites
+                    database.favouritesDAO().deleteFromFavourites(currentRecipe)
+                    withContext(Dispatchers.Main) {
+                        favouritesImg.setImageResource(R.drawable.addfav)
+                        Toast.makeText(context, "Removed from Favorites", Toast.LENGTH_SHORT).show()
+                    }
+                } else {
+                    // Add to favorites
+                    database.favouritesDAO().addToFavourites(currentRecipe)
+                    withContext(Dispatchers.Main) {
+                        favouritesImg.setImageResource(R.drawable.addedfav)
+                        Toast.makeText(context, "Added to Favorites", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        }
     }
 
     companion object {

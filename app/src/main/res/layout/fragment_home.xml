@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
     tools:context=".HomeFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:background="#FFFFFF"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="match_parent">
 
         <TextView
             android:layout_width="wrap_content"
@@ -28,6 +28,7 @@
             android:textColor="#282833"
             android:textSize="24sp"
             tools:ignore="UnusedAttribute" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -42,20 +43,25 @@
             android:text="@string/discover_tasty_and_healthy_receipt"
             tools:ignore="UnusedAttribute" />
 
-        <SearchView
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:id="@+id/search_bar"
-            android:queryHint="Search Any Recipe"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/discover"
-            android:iconifiedByDefault="false"
-            android:layout_marginTop="8dp"
+            android:fontFamily="@font/inter"
+            android:drawablePadding="16dp"
+            android:paddingStart="16dp"
+            android:gravity="center_vertical"
+            android:paddingEnd="16dp"
+            android:text="@string/search_any_recipe"
+            android:textSize="16sp"
+            android:textColor="#606F89"
+            android:layout_marginTop="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:background="@drawable/searchbar"
-
-
+            app:drawableStartCompat="@drawable/search_icon"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/discover"
+            android:background="@drawable/search_bar"
             />
         <TextView
             android:layout_width="wrap_content"

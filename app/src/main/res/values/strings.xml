@@ -22,4 +22,5 @@
     <string name="equipments">Equipments</string>
     <string name="equipments_img">equipments_img</string>
     <string name="quick_summary">Quick Summary</string>
+    <string name="search_any_recipe">Search any recipe</string>
 </resources>

@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hashdroid.recipeapp.RecipeResponse
@@ -27,12 +28,26 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_home, container, false)
 
+        //change fragment on click on search bar
+        val search: TextView= view.findViewById(R.id.search_bar)
+
+        search.setOnClickListener {
+            activity?.findViewById<View>(R.id.bottomNavBar)?.visibility = View.GONE
+            // Navigate to the new fragment
+            val newFragment = SearchView()
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.frame_container, newFragment) // Replace 'fragment_container' with your actual container ID
+                .addToBackStack(null) // Add to backstack for back navigation
+                .commit()
+        }
+
         // Initialize RecyclerView
         val recyclerView1 = view.findViewById<RecyclerView>(R.id.recycler_view1)
         recyclerView1.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
         val recyclerView2 = view.findViewById<RecyclerView>(R.id.recycler_view2)
         recyclerView2.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+
 
         // Fetch random recipes
         fetchRandomRecipes(view)
