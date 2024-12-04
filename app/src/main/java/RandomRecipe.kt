@@ -1,3 +1,4 @@
+import com.hashdroid.recipeapp.Recipe
 import com.hashdroid.recipeapp.RecipeResponse
 import com.hashdroid.recipeapp.RecipeResponse2
 import com.hashdroid.recipeapp.Recipie_View
@@ -24,4 +25,10 @@ interface RecipeApiService {
         @Path("id") id:Int,
         @Query("apiKey") apiKey: String
     ): Call<Recipie_View>
+
+    @GET("recipes/autocomplete")
+    fun getAutocompleteRecipes(
+        @Query("query") query: String?,
+        @Query("apiKey") apiKey: String
+    ): Call<List<Recipe>>
 }

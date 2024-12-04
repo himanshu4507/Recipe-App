@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/search_view1"
+    android:orientation="horizontal"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    android:backgroundTint="#F2F7FD"
+    android:layout_marginTop="16dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    tools:ignore="UseCompoundDrawables">
+
+    <ImageView
+        android:layout_height="20dp"
+        android:layout_width="20dp"
+        android:id="@+id/dishImage_searchView"
+        android:src="@drawable/dish_searchview"
+        android:layout_gravity="center_vertical"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/dishTitle_searchView"
+        android:textColor="#171B21"
+        android:text="@string/kadhai_paneer"
+        android:fontFamily="@font/inter"
+        android:textSize="14sp"
+        android:textFontWeight="400"
+        android:lineHeight="20sp"
+        android:layout_marginLeft="8dp"
+        android:gravity="center_vertical"/>
+
+</LinearLayout>
