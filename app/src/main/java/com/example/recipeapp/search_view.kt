@@ -15,7 +15,7 @@ import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.hashdroid.recipe_app.network.SearchViewAdapter
+import SearchViewAdapter
 import com.hashdroid.recipeapp.Recipe
 import com.hashdroid.recipeapp.RetrofitClient
 import retrofit2.Call
@@ -105,7 +105,7 @@ class SearchView : Fragment() {
     private fun fetchRecipes(query: String) {
         if (query.isEmpty()) {
             // Clear the RecyclerView if query is empty
-            adapter.updateRecipes(emptyList())
+            adapter.updateRecipes(emptyList(),"")
             return
         }
 
@@ -116,9 +116,15 @@ class SearchView : Fragment() {
         call.enqueue(object : Callback<List<Recipe>> {
             override fun onResponse(call: Call<List<Recipe>>, response: Response<List<Recipe>>) {
                 if (response.isSuccessful) {
-                    val recipes = response.body() ?: emptyList()
+                    val recipes = response.body()?.map { recipe ->
+                        recipe.copy(
+                            title = recipe.title.replaceFirstChar { it.uppercaseChar() },
+                            image = recipe.image ?: "" // Provide a default value for image
+                        )
+                    } ?: emptyList()
+
                     Log.d("API Response", "Number of recipes: ${recipes.size}")
-                    adapter.updateRecipes(recipes) // Update RecyclerView adapter
+                    adapter.updateRecipes(recipes,query) // Update RecyclerView adapter
                 }
                 else{
                     Log.e("API Response", "Error: ${response.errorBody()?.string()}")
@@ -127,7 +133,7 @@ class SearchView : Fragment() {
 
             override fun onFailure(call: Call<List<Recipe>>, t: Throwable) {
                 // Handle API failure (e.g., show a message or clear RecyclerView)
-                adapter.updateRecipes(emptyList())
+                adapter.updateRecipes(emptyList(),"")
             }
         })
     }

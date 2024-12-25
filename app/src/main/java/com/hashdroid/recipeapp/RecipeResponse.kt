@@ -14,4 +14,11 @@ data class Recipe(
     val id:Int
 )
 
+data class SimilarRecipes(
+    val id: Int,
+    val title: String,
+    val sourceUrl: String,
+    val readyInMinutes: Int
+)
+
 

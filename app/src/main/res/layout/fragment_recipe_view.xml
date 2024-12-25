@@ -7,11 +7,28 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF"
     tools:context=".Recipie_view">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <!-- ProgressBar - Centered on the screen -->
+        <ProgressBar
+            android:id="@+id/global_progress_bar"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:indeterminate="true"
+            android:visibility="gone"
+            android:layout_gravity="center" />
+
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/recipeHome"
         android:background="#FFFFFF">
+
 
         <!-- Example ImageView -->
         <ImageView
@@ -299,7 +316,171 @@
             android:textColor="#606f89"
             android:text="@string/llll"
             />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:id="@+id/nutrition"
+            android:layout_marginBottom="8dp"
+            android:background="#F2F7FD"
+            app:layout_constraintTop_toBottomOf="@id/summary"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="16dp">
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/nutrition_ll">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/nutrition_heading"
+                    android:text="Nutrition"
+                    android:fontFamily="@font/inter"
+                    android:textStyle="bold"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="16dp"
+                    android:textColor="#171B21"
+                    android:textSize="16sp"/>
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:id="@+id/nutrition_image"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="16dp"
+                    android:layout_centerVertical="true"
+                    android:contentDescription="dropDown_and_dropUp"
+                    android:src="@drawable/drop_up_arrow"/>
+            </RelativeLayout>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/nutrition_textview"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="8dp"
+                android:text="Lorem ipsum dolor sit amet consectetur. Sagittis facilisis aliquet aenean lorem ullamcorper et. Risus lectus id sed fermentum in. At porta sed ut lorem volutpat elementum mi sollicitudin. Laoreet tempor nullam velit dui amet mauris sed ac sem."
+                android:fontFamily="@font/inter"
+                android:textColor="#606F89"
+                android:textSize="14sp"
+                android:textFontWeight="400"
+                android:lineHeight="20sp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:id="@+id/Bad_for_health"
+            android:background="#F2F7FD"
+            app:layout_constraintTop_toBottomOf="@id/nutrition"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="16dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/Bad_for_health_ll">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/Bad_for_health_heading"
+                    android:text="Bad for health nutrition"
+                    android:fontFamily="@font/inter"
+                    android:textStyle="bold"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="16dp"
+                    android:textColor="#171B21"
+                    android:textSize="16sp"/>
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:id="@+id/Bad_for_health_image"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="16dp"
+                    android:layout_centerVertical="true"
+                    android:contentDescription="dropDown_and_dropUp"
+                    android:src="@drawable/drop_up_arrow"/>
+            </RelativeLayout>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/Bad_for_health_textview"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="8dp"
+                android:text="Lorem ipsum dolor sit amet consectetur. Sagittis facilisis aliquet aenean lorem ullamcorper et. Risus lectus id sed fermentum in. At porta sed ut lorem volutpat elementum mi sollicitudin. Laoreet tempor nullam velit dui amet mauris sed ac sem."
+                android:fontFamily="@font/inter"
+                android:textColor="#606F89"
+                android:textSize="14sp"
+                android:textFontWeight="400"
+                android:lineHeight="20sp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:id="@+id/Good_for_health"
+            android:background="#F2F7FD"
+            app:layout_constraintTop_toBottomOf="@id/Bad_for_health"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="16dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/Good_for_health_ll">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/Good_for_health_heading"
+                    android:text="Good for health nutrition"
+                    android:fontFamily="@font/inter"
+                    android:textStyle="bold"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="16dp"
+                    android:textColor="#171B21"
+                    android:textSize="16sp"/>
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:id="@+id/Good_for_health_image"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="16dp"
+                    android:layout_centerVertical="true"
+                    android:contentDescription="dropDown_and_dropUp"
+                    android:src="@drawable/drop_up_arrow"/>
+            </RelativeLayout>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/Good_for_health_textview"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="Lorem ipsum dolor sit amet consectetur. Sagittis facilisis aliquet aenean lorem ullamcorper et. Risus lectus id sed fermentum in. At porta sed ut lorem volutpat elementum mi sollicitudin. Laoreet tempor nullam velit dui amet mauris sed ac sem."
+                android:fontFamily="@font/inter"
+                android:textColor="#606F89"
+                android:textSize="14sp"
+                android:textFontWeight="400"
+                android:lineHeight="20sp"/>
+
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </FrameLayout>
 
 </ScrollView>

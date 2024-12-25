@@ -1,4 +1,4 @@
-package com.hashdroid.recipe_app.network
+package com.example.recipeapp
 
 import android.content.ContentValues.TAG
 import android.os.Bundle
@@ -6,16 +6,17 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import com.bumptech.glide.Glide
+import com.example.recipeapp.R
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.hashdroid.recipe_app.IngredientsDishOverview
-import com.hashdroid.recipe_app.R
-import com.hashdroid.recipe_app.RetrofitClient
+import com.hashdroid.recipeapp.Recipie_View
+import com.hashdroid.recipeapp.RetrofitClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -39,6 +40,12 @@ class DishOverview: BottomSheetDialogFragment() {
         // Inflate the layout
         val view = inflater.inflate(R.layout.fragment_dish_overview, container, false)
 
+        // Handle back button click
+        val backArrow = view.findViewById<ImageView>(R.id.back_arrow)
+        backArrow.setOnClickListener {
+            dismiss() // Close the bottom sheet
+        }
+
         //passing the id to the next fragment on button click
         button_dishOverview = view.findViewById(R.id.btn_dishoverview)
 
@@ -52,6 +59,7 @@ class DishOverview: BottomSheetDialogFragment() {
 
             dismiss()
             nextFragment?.show(parentFragmentManager, "IngredientsDishOverview")
+
         }
 
 
@@ -62,14 +70,33 @@ class DishOverview: BottomSheetDialogFragment() {
         return view
     }
 
+    // for max height
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        dialog?.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)?.let { bottomSheet ->
+            val behavior = BottomSheetBehavior.from(bottomSheet)
+
+            // Set max height to 80% of screen height
+            val maxHeight = (resources.displayMetrics.heightPixels * 0.8).toInt()
+            bottomSheet.layoutParams = bottomSheet.layoutParams.apply {
+                height = maxHeight
+            }
+
+            // Expand the BottomSheet
+            behavior.state = BottomSheetBehavior.STATE_EXPANDED
+        }
+    }
+
+
 
     private fun fetchDishOverview() {
         val apiKey = "6511024c4bb146f09491fe45f612b0ab"
         val retrofit = RetrofitClient.retrofit
         val call = recipiId?.let { retrofit.getRecipieView(it, apiKey) }
 
-        call?.enqueue(object : Callback<RecipieView> {
-            override fun onResponse(call: Call<RecipieView>, response: Response<RecipieView>) {
+        call?.enqueue(object : Callback<Recipie_View> {
+            override fun onResponse(call: Call<Recipie_View>, response: Response<Recipie_View>) {
                 if(response.isSuccessful) {
                     Log.d(TAG, "API call successful: ${response.code()}")
                     Toast.makeText(requireContext(), "API call successful!", Toast.LENGTH_SHORT).show()
@@ -107,7 +134,7 @@ class DishOverview: BottomSheetDialogFragment() {
                 }
             }
 
-            override fun onFailure(p0: Call<RecipieView>, p1: Throwable) {
+            override fun onFailure(p0: Call<Recipie_View>, p1: Throwable) {
                 Toast.makeText(requireContext(), p1.localizedMessage, Toast.LENGTH_SHORT).show()
             }
 

@@ -26,7 +26,8 @@ class FavouriteFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(context)
 
         // Initialize Adapter with an empty list
-        favouritesAdapter = FavouritesAdapter(emptyList()) { favourite ->
+        favouritesAdapter = FavouritesAdapter(emptyList()) { recipeId ->
+            openRecipeViewFragment(recipeId)
             // Handle item click here (e.g., navigate to a details page)
             // Example: Toast.makeText(context, "Clicked: ${favourite.title}", Toast.LENGTH_SHORT).show()
         }
@@ -41,5 +42,22 @@ class FavouriteFragment : Fragment() {
         }
 
         return view
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // Show BottomNavigationView when returning to HomeFragment
+        activity?.findViewById<View>(R.id.bottomNavBar)?.visibility = View.VISIBLE
+    }
+    private fun openRecipeViewFragment(recipe: FavouritesEntity) {
+        val fragment = Recipie_view.newInstance(recipe.id)
+
+
+        activity?.findViewById<View>(R.id.bottomNavBar)?.visibility = View.GONE
+
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.frame_container, fragment)
+            .addToBackStack(null)
+            .commit()
     }
 }

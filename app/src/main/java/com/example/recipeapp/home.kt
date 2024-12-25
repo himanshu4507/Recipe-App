@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hashdroid.recipeapp.RecipeResponse
@@ -20,6 +21,7 @@ class HomeFragment : Fragment() {
 
     private lateinit var horizontalAdapter: HorizontalAdapter
     private lateinit var verticalAdapter: VerticalAdaptor
+    private lateinit var progressBar: View // Add reference for ProgressBar
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,6 +50,9 @@ class HomeFragment : Fragment() {
         val recyclerView2 = view.findViewById<RecyclerView>(R.id.recycler_view2)
         recyclerView2.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
+        // Initialize ProgressBar
+        progressBar = view.findViewById(R.id.global_progress_bar)
+
 
         // Fetch random recipes
         fetchRandomRecipes(view)
@@ -56,34 +61,57 @@ class HomeFragment : Fragment() {
         return view
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        progressBar.visibility = View.GONE
+    }
+
+
     private fun fetchRandomRecipes(view: View) {
-        val apiKey = "6511024c4bb146f09491fe45f612b0ab"
+        val apiKey = //"6511024c4bb146f09491fe45f612b0ab"
             //"7e09bf0f61914144b91065b5d90803ea"
-        //"195f87d5a199467797f27b34555430e1"
+        "195f87d5a199467797f27b34555430e1"
         val retrofit = RetrofitClient.retrofit
         val call = retrofit.getRandomRecipes(10, apiKey)
+
+        // Show ProgressBar before making the API call
+        progressBar.visibility = View.VISIBLE
+
         call.enqueue(object : Callback<RecipeResponse> {
             override fun onResponse(call: Call<RecipeResponse>, response: Response<RecipeResponse>) {
                 if (response.isSuccessful) {
                     response.body()?.recipes?.let { recipes ->
-                        horizontalAdapter = HorizontalAdapter(recipes)
+                        horizontalAdapter = HorizontalAdapter(recipes){ recipeId ->
+                            openRecipeViewFragment(recipeId)
+                        }
                         view.findViewById<RecyclerView>(R.id.recycler_view1).adapter = horizontalAdapter
                     }
+                    // Hide ProgressBar when data is loaded
+                    progressBar.visibility = View.GONE
+
                 }
             }
 
             override fun onFailure(call: Call<RecipeResponse>, t: Throwable) {
-                // Handle API call failure
+
+                Toast.makeText(context, "Failed to fetch data. Please try again.", Toast.LENGTH_SHORT).show()
+
+                // Hide ProgressBar when data is loaded
+                progressBar.visibility = View.GONE
+
             }
         })
     }
 
     private fun fetchAllRecipes(view: View) {
-        val apiKey = "6511024c4bb146f09491fe45f612b0ab"
+        val apiKey = //"6511024c4bb146f09491fe45f612b0ab"
             //"7e09bf0f61914144b91065b5d90803ea"
-        //"195f87d5a199467797f27b34555430e1"
+        "195f87d5a199467797f27b34555430e1"
         val retrofit = RetrofitClient.retrofit
         val call = retrofit.getSearchRecipes(50, apiKey)
+
+        // Show ProgressBar before making the API call
+        progressBar.visibility = View.VISIBLE
         call.enqueue(object : Callback<RecipeResponse2> {
             override fun onResponse(call: Call<RecipeResponse2>, response: Response<RecipeResponse2>) {
                 if (response.isSuccessful) {
@@ -93,11 +121,17 @@ class HomeFragment : Fragment() {
                         }
                         view.findViewById<RecyclerView>(R.id.recycler_view2).adapter = verticalAdapter
                     }
+                    // Hide ProgressBar when data is loaded
+                    progressBar.visibility = View.GONE
                 }
             }
 
             override fun onFailure(call: Call<RecipeResponse2>, t: Throwable) {
-                // Handle API call failure
+
+                Toast.makeText(context, "Failed to fetch data. Please try again.", Toast.LENGTH_SHORT).show()
+
+                // Hide ProgressBar when data is loaded
+                progressBar.visibility = View.GONE
             }
         })
     }

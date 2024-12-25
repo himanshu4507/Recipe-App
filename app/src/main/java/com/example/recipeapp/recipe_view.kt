@@ -11,13 +11,13 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.media3.database.DatabaseProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.hashdroid.recipeapp.Equipment
-import com.hashdroid.recipeapp.Ingredient
 import com.hashdroid.recipeapp.Recipie_View
 import com.hashdroid.recipeapp.RetrofitClient
 import com.hashdroid.recipeapp.Step
@@ -38,6 +38,8 @@ class Recipie_view : Fragment() {
     private var imgTitle: String? = null
     private var imgUrl: String? = null
     private var cookingtime: Int = 0
+    private lateinit var progressBar: View // Add reference for ProgressBar
+    private lateinit var contentLayout: ConstraintLayout  // The parent layout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,6 +74,73 @@ class Recipie_view : Fragment() {
         // Reference to the heart image view
         favouritesImg = view.findViewById(R.id.favourites_img)
 
+        // nutrition bad for health
+
+        val toggle_img1 = view.findViewById<ImageView>(R.id.nutrition_image)
+        val toggle_img2 = view.findViewById<ImageView>(R.id.Bad_for_health_image)
+        val toggle_img3 = view.findViewById<ImageView>(R.id.Good_for_health_image)
+        val nutrition_textview1 = view.findViewById<TextView>(R.id.nutrition_textview)
+        val Bad_for_health_textview2 = view.findViewById<TextView>(R.id.Bad_for_health_textview)
+        val Good_for_health_textview3 = view.findViewById<TextView>(R.id.Good_for_health_textview)
+
+        //making text view initially gone
+        nutrition_textview1.isVisible = false
+        Bad_for_health_textview2.isVisible = false
+        Good_for_health_textview3.isVisible = false
+
+        toggle_img1.setOnClickListener {
+            // Toggle the visibility of the TextView
+            nutrition_textview1.visibility = if (nutrition_textview1.visibility == View.VISIBLE) {
+                View.GONE
+            } else {
+                View.VISIBLE
+            }
+
+            if (nutrition_textview1.visibility == View.VISIBLE) {
+                toggle_img1.setImageResource(R.drawable.drop_up_arrow)
+            } else {
+                toggle_img1.setImageResource(R.drawable.drop_down_arrow)
+            }
+        }
+
+        toggle_img2.setOnClickListener {
+            // Toggle the visibility of the TextView
+            Bad_for_health_textview2.visibility = if (Bad_for_health_textview2.visibility == View.VISIBLE) {
+                View.GONE
+            } else {
+                View.VISIBLE
+            }
+
+            if (Bad_for_health_textview2.visibility == View.VISIBLE) {
+                toggle_img2.setImageResource(R.drawable.drop_up_arrow)
+            } else {
+                toggle_img2.setImageResource(R.drawable.drop_down_arrow)
+            }
+        }
+
+        toggle_img3.setOnClickListener {
+            // Toggle the visibility of the TextView
+            Good_for_health_textview3.visibility = if (Good_for_health_textview3.visibility == View.VISIBLE) {
+                View.GONE
+            } else {
+                View.VISIBLE
+            }
+
+            if (Good_for_health_textview3.visibility == View.VISIBLE) {
+                toggle_img3.setImageResource(R.drawable.drop_up_arrow)
+            } else {
+                toggle_img3.setImageResource(R.drawable.drop_down_arrow)
+            }
+        }
+
+        // Initialize ProgressBar
+        progressBar = view.findViewById(R.id.global_progress_bar)
+
+        contentLayout = view.findViewById(R.id.recipeHome)
+
+
+        // Initially hide all UI elements
+        contentLayout.visibility = View.GONE
 
         fetchRecipieView(view);
         // Here you can use recipeId to fetch and display data or call an API
@@ -79,12 +148,16 @@ class Recipie_view : Fragment() {
     }
 
     private fun fetchRecipieView(view: View) {
-        val apiKey = "6511024c4bb146f09491fe45f612b0ab"
+        val apiKey = //"6511024c4bb146f09491fe45f612b0ab"
             //"7e09bf0f61914144b91065b5d90803ea"
-        //"195f87d5a199467797f27b34555430e1"
+        "195f87d5a199467797f27b34555430e1"
         val retrofit = RetrofitClient.retrofit
         Log.d("TAG", recipeId.toString())
         val call = recipeId?.let { retrofit.getRecipieView(it, apiKey) }
+
+
+        // Show ProgressBar before making the API call
+        progressBar.visibility = View.VISIBLE
 
         call?.enqueue(object : Callback<Recipie_View> {
             override fun onResponse(
@@ -95,12 +168,10 @@ class Recipie_view : Fragment() {
                     response.body()?.let {
 
                         // Ingredients RV
-                        val list = mutableListOf<Ingredient>()
-                        it.analyzedInstructions.forEach {
-                            it.steps.forEach {
-                                list.addAll(it.ingredients)
-                            }
-                        }
+                        val list = it.analyzedInstructions
+                            .flatMap { instruction -> instruction.steps.flatMap { step -> step.ingredients } }
+                            .distinctBy { ingredient -> ingredient.id } // Ensures uniqueness based on ingredient ID
+
                         Log.d("TAG", "onResponse: $it")
 
                         ingredientAdapter = IngredientsAdaptor(list)
@@ -168,6 +239,12 @@ class Recipie_view : Fragment() {
                         imgUrl = it.image
                         cookingtime = it.readyInMinutes
 
+                        // Hide ProgressBar when data is loaded
+                        progressBar.visibility = View.GONE
+
+                        // visible all UI elements
+                        contentLayout.visibility = View.VISIBLE
+
                         // Set up favorite handling
                         handleFavoriteClick()
 
@@ -177,6 +254,10 @@ class Recipie_view : Fragment() {
             }
 
             override fun onFailure(p0: Call<Recipie_View>, p1: Throwable) {
+
+                // Hide ProgressBar when data is loaded
+                progressBar.visibility = View.GONE
+
                 Toast.makeText(requireContext(), p1.localizedMessage, Toast.LENGTH_LONG).show()
             }
         })

@@ -2,6 +2,7 @@ import com.hashdroid.recipeapp.Recipe
 import com.hashdroid.recipeapp.RecipeResponse
 import com.hashdroid.recipeapp.RecipeResponse2
 import com.hashdroid.recipeapp.Recipie_View
+import com.hashdroid.recipeapp.SimilarRecipes
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -31,4 +32,10 @@ interface RecipeApiService {
         @Query("query") query: String?,
         @Query("apiKey") apiKey: String
     ): Call<List<Recipe>>
+
+    @GET("recipes/{id}/similar")
+    fun getSimilarRecipes(
+        @Path("id") id: Int,
+        @Query("apiKey") apiKey: String
+    ): Call<List<SimilarRecipes>>
 }

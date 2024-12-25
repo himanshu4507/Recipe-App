@@ -24,4 +24,9 @@
     <string name="quick_summary">Quick Summary</string>
     <string name="search_any_recipe">Search any recipe</string>
     <string name="kadhai_paneer">Kadhai paneer</string>
+    <string name="previous_fragment">previous_fragment</string>
+    <string name="shahi_paneer">shahi_paneer</string>
+    <string name="get_similar_recipe">Get similar recipe</string>
+    <string name="full_recipe">Full recipe</string>
+    <string name="similar_recipes">Similar recipes</string>
 </resources>
